@@ -1,39 +1,65 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { Router } from '@vaadin/router';
 
-// 模拟登录状态（实际项目可用全局状态管理）
-// let isLoggedIn = false;
+let isLoggedIn = false; // 模拟登录状态
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
-  static styles = css`
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: blue;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-  `;
-
   firstUpdated() {
     const outlet = this.renderRoot.querySelector('#outlet');
     const router = new Router(outlet!);
 
     router.setRoutes([
-      { path: '/', component: 'home-view' },
       {
-        path: '/about',
-        action: async (_, commands) => {
-          // 路由守卫示例
-          if (!(window as any).isLoggedIn) {
-            return commands.redirect('/login');
-          }
-          await import('./views/about-view.js');
+        path: '/',
+        component: 'home-layout',
+        action: async () => {
+          await import('./layouts/home-layout.js');
         },
         children: [
+          {
+            path: '/',
+            component: 'home-view',
+            action: async () => {
+              await import('./views/home-view.js');
+            }
+          }
+        ]
+      },
+      {
+        path: '/login',
+        component: 'login-layout',
+        action: async () => {
+          await import('./layouts/login-layout.js');
+        },
+        children: [
+          {
+            path: '/',
+            component: 'login-view',
+            action: async () => {
+              await import('./views/login-view.js');
+            }
+          }
+        ]
+      },
+      {
+        path: '/about',
+        component: 'main-layout',
+        action: async (_, commands) => {
+          if (!isLoggedIn) {
+            return commands.redirect('/login');
+          }
+          await import('./layouts/main-layout.js');
+        },
+        children: [
+          {
+            path: '/',
+            component: 'about-view',
+            action: async () => {
+              await import('./views/about-view.js');
+            }
+          },
           {
             path: '/team',
             component: 'team-view',
@@ -44,25 +70,25 @@ export class AppRoot extends LitElement {
         ]
       },
       {
-        path: '/login',
-        component: 'login-view',
+        path: '(.*)',
+        component: 'error-layout',
         action: async () => {
-          await import('./views/login-view.js');
-        }
-      },
-      { path: '(.*)', component: 'not-found-view' }
+          await import('./layouts/error-layout.js');
+        },
+        children: [
+          {
+            path: '/',
+            component: 'not-found-view',
+            action: async () => {
+              await import('./views/not-found-view.js');
+            }
+          }
+        ]
+      }
     ]);
   }
 
   render() {
-    return html`
-      <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/about/team">Team</a>
-        <a href="/login">Login</a>
-      </nav>
-      <div id="outlet"></div>
-    `;
+    return html`<div id="outlet"></div>`;
   }
 }
