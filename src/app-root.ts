@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { Router } from '@vaadin/router';
 
 // 模拟登录状态（实际项目可用全局状态管理）
-let isLoggedIn = false;
+// let isLoggedIn = false;
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
@@ -26,18 +26,30 @@ export class AppRoot extends LitElement {
       { path: '/', component: 'home-view' },
       {
         path: '/about',
-        action: (_, commands) => {
-          if (!isLoggedIn) {
-            return commands.redirect('/login'); // 路由守卫：未登录跳转到 /login
+        action: async (_, commands) => {
+          // 路由守卫示例
+          if (!(window as any).isLoggedIn) {
+            return commands.redirect('/login');
           }
-          return undefined; // 继续进入 about
+          await import('./views/about-view.js');
         },
         children: [
-          { path: '/', component: 'about-view' },
-          { path: '/team', component: 'team-view' }
+          {
+            path: '/team',
+            component: 'team-view',
+            action: async () => {
+              await import('./views/team-view.js');
+            }
+          }
         ]
       },
-      { path: '/login', component: 'login-view' },
+      {
+        path: '/login',
+        component: 'login-view',
+        action: async () => {
+          await import('./views/login-view.js');
+        }
+      },
       { path: '(.*)', component: 'not-found-view' }
     ]);
   }
