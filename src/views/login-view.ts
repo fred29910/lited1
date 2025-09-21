@@ -1,9 +1,16 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
+import { consume } from '@lit/context';
 import { Router } from '@vaadin/router';
+import { authContext } from '../contexts/auth-context';
+import type { AuthContext } from '../contexts/auth-context';
 
 @customElement('login-view')
 export class LoginView extends LitElement {
+  @consume({ context: authContext, subscribe: true })
+  @state()
+  private _auth?: AuthContext;
+
   @state()
   private _username = '';
 
@@ -95,7 +102,7 @@ export class LoginView extends LitElement {
     if (this._username && this._password) {
       console.log(`用户: ${this._username}, 密码: ${this._password}`);
       // 模拟登录成功
-      (window as any).isLoggedIn = true;
+      this._auth?.login();
       // 使用 Vaadin Router 进行页面跳转
       Router.go('/about');
     } else {

@@ -1,16 +1,32 @@
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
+import { provide } from '@lit/context';
 import { Router } from '@vaadin/router';
-
-// let isLoggedIn = false; // 模拟登录状态
+// import type { Commands } from '@vaadin/router';
+import { authContext } from './contexts/auth-context';
+import type { AuthContext } from './contexts/auth-context';
 
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
+  @provide({ context: authContext })
+  @state()
+  private _auth: AuthContext = {
+    isLoggedIn: localStorage.getItem('isLoggedIn') === 'true',
+    login: () => {
+      localStorage.setItem('isLoggedIn', 'true');
+      this._auth = { ...this._auth, isLoggedIn: true };
+    },
+    logout: () => {
+      localStorage.removeItem('isLoggedIn');
+      this._auth = { ...this._auth, isLoggedIn: false };
+      Router.go('/login');
+    },
+  };
+
   firstUpdated() {
     const outlet = this.renderRoot.querySelector('#outlet');
     const router = new Router(outlet!);
-
     router.setRoutes([
       {
         path: '/',
@@ -24,17 +40,17 @@ export class AppRoot extends LitElement {
             component: 'home-view',
             action: async () => {
               await import('./views/home-view.js');
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         path: '/about',
         component: 'main-layout',
-        action: async (_) => {
-          // if (!isLoggedIn) {
-          //   return commands.redirect('/login');
-          // }
+        action: async (_, commands) => {
+          if (!this._auth.isLoggedIn) {
+            return commands.redirect('/login');
+          }
           await import('./layouts/main-layout.js');
         },
         children: [
