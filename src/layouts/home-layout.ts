@@ -9,7 +9,10 @@ export class HomeLayout extends LitElement {
   render() {
     return html`
       <header>🏠 Home Layout</header>
-      <slot></slot>
+      <main>
+        <div id="outlet"></div>
+      </main>
+      <footer>Copyright 2025</footer>
     `;
   }
 }

@@ -27,6 +27,23 @@ export class AppRoot extends LitElement {
           }
         ]
       },
+      
+      {
+        path: '/register',
+        component: 'login-layout',
+        action: async () => {
+          await import('./layouts/login-layout.js');
+        },
+        children: [
+          {
+            path: '/',
+            component: 'register-view',
+            action: async () => {
+              await import('./views/register-view.js');
+            }
+          }
+        ]
+      },
       {
         path: '/login',
         component: 'login-layout',

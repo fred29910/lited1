@@ -8,7 +8,6 @@ export class LoginLayout extends LitElement {
   `;
   render() {
     return html`
-      <header>🔐 Login Layout</header>
       <slot></slot>
     `;
   }

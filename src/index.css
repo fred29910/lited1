@@ -24,9 +24,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  /* display: flex; */
+  /* place-items: center; */
+  min-width: 100vw;
   min-height: 100vh;
 }
 
@@ -35,4 +35,10 @@ body {
     color: #213547;
     background-color: #ffffff;
   }
+}
+
+app-root {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }

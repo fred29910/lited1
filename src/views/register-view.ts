@@ -2,13 +2,16 @@ import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { Router } from '@vaadin/router';
 
-@customElement('login-view')
-export class LoginView extends LitElement {
+@customElement('register-view')
+export class RegisterView extends LitElement {
   @state()
   private _username = '';
 
   @state()
   private _password = '';
+
+  @state()
+  private _confirmPassword = '';
 
   static styles = css`
     :host {
@@ -19,7 +22,7 @@ export class LoginView extends LitElement {
       height: 100vh;
       font-family: sans-serif;
     }
-    .login-container {
+    .register-container {
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -52,21 +55,21 @@ export class LoginView extends LitElement {
       padding: 0.75rem;
       border: none;
       border-radius: 4px;
-      background-color: #007bff;
+      background-color: #28a745;
       color: white;
       font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s;
     }
     button:hover {
-      background-color: #0056b3;
+      background-color: #218838;
     }
   `;
 
   render() {
     return html`
-      <div class="login-container">
-        <h2>🔐 登录</h2>
+      <div class="register-container">
+        <h2>📝 注册新用户</h2>
         <div class="form-group">
           <label for="username">用户名</label>
           <input
@@ -85,19 +88,31 @@ export class LoginView extends LitElement {
             @input=${(e: Event) => this._password = (e.target as HTMLInputElement).value}
           />
         </div>
-        <button @click=${this._login}>登录</button>
+        <div class="form-group">
+          <label for="confirmPassword">确认密码</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            .value=${this._confirmPassword}
+            @input=${(e: Event) => this._confirmPassword = (e.target as HTMLInputElement).value}
+          />
+        </div>
+        <button @click=${this._register}>注册</button>
       </div>
     `;
   }
 
-  private _login() {
-    // 模拟登录验证
+  private _register() {
+    if (this._password !== this._confirmPassword) {
+      alert('两次输入的密码不一致');
+      return;
+    }
+
     if (this._username && this._password) {
-      console.log(`用户: ${this._username}, 密码: ${this._password}`);
-      // 模拟登录成功
-      (window as any).isLoggedIn = true;
-      // 使用 Vaadin Router 进行页面跳转
-      Router.go('/about');
+      console.log(`注册用户: ${this._username}, 密码: ${this._password}`);
+      // 模拟注册成功
+      alert('注册成功！现在将跳转到登录页面。');
+      Router.go('/login');
     } else {
       alert('请输入用户名和密码');
     }
