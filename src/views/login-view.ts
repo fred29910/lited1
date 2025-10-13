@@ -124,18 +124,14 @@ function encryptToHex(text: string): string {
   // An example 128-bit key
   const key = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-  // The initialization vector (must be 16 bytes)
-  const iv = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
-
   // Convert text to bytes (text must be a multiple of 16 bytes)
   const textBytes = aesjs.utils.utf8.toBytes(text);
 
-  const aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
-  const encryptedBytes = aesCbc.encrypt(textBytes);
+  var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+  var encryptedBytes = aesCtr.encrypt(textBytes);
 
   // To print or store the binary data, you may convert it to hex
   const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
-  console.log(encryptedHex);
   return encryptedHex
   // "104fb073f9a131f2cab49184bb864ca2"
 
