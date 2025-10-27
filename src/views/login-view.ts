@@ -104,18 +104,16 @@ export class LoginView extends LitElement {
       console.log(`用户: ${this._username}, 密码: ${this._password}`);
 
 
-const SecretPs = "Secret Passphrase"
-
+      const SecretPs = "Secret Passphrase"
       const usernameEnCoded = CryptoJS.AES.encrypt(this._username, SecretPs);
 
 
-      const usernameDecrypted = CryptoJS.AES.decrypt(usernameEnCoded, SecretPs);
+      const usernameDecrypted = CryptoJS.AES.decrypt(usernameEnCoded, SecretPs).toString();
 
 
       const passwordEnCoded = CryptoJS.AES.encrypt(this._username, SecretPs);
 
-
-      const passwordDecrypted = CryptoJS.AES.decrypt(passwordEnCoded, SecretPs);
+      const passwordDecrypted = CryptoJS.AES.decrypt(passwordEnCoded, SecretPs).toString();
 
 
 
