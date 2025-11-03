@@ -76,7 +76,8 @@ export class RegisterView extends LitElement {
             id="username"
             type="text"
             .value=${this._username}
-            @input=${(e: Event) => this._username = (e.target as HTMLInputElement).value}
+            @input=${(e: Event) =>
+              (this._username = (e.target as HTMLInputElement).value)}
           />
         </div>
         <div class="form-group">
@@ -85,7 +86,8 @@ export class RegisterView extends LitElement {
             id="password"
             type="password"
             .value=${this._password}
-            @input=${(e: Event) => this._password = (e.target as HTMLInputElement).value}
+            @input=${(e: Event) =>
+              (this._password = (e.target as HTMLInputElement).value)}
           />
         </div>
         <div class="form-group">
@@ -94,7 +96,8 @@ export class RegisterView extends LitElement {
             id="confirmPassword"
             type="password"
             .value=${this._confirmPassword}
-            @input=${(e: Event) => this._confirmPassword = (e.target as HTMLInputElement).value}
+            @input=${(e: Event) =>
+              (this._confirmPassword = (e.target as HTMLInputElement).value)}
           />
         </div>
         <button @click=${this._register}>注册</button>

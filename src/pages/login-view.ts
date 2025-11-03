@@ -2,9 +2,9 @@ import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { Router } from '@vaadin/router';
-import { authContext } from '../contexts/auth-context';
-import type { AuthContext } from '../contexts/auth-context';
-import CryptoJS from 'crypto-js'
+import { authContext } from '../store/auth-store';
+import type { AuthContext } from '../store/auth-store';
+import CryptoJS from 'crypto-js';
 
 @customElement('login-view')
 export class LoginView extends LitElement {
@@ -81,7 +81,8 @@ export class LoginView extends LitElement {
             id="username"
             type="text"
             .value=${this._username}
-            @input=${(e: Event) => this._username = (e.target as HTMLInputElement).value}
+            @input=${(e: Event) =>
+              (this._username = (e.target as HTMLInputElement).value)}
           />
         </div>
         <div class="form-group">
@@ -90,7 +91,8 @@ export class LoginView extends LitElement {
             id="password"
             type="password"
             .value=${this._password}
-            @input=${(e: Event) => this._password = (e.target as HTMLInputElement).value}
+            @input=${(e: Event) =>
+              (this._password = (e.target as HTMLInputElement).value)}
           />
         </div>
         <button @click=${this._login}>登录</button>
@@ -103,19 +105,20 @@ export class LoginView extends LitElement {
     if (this._username && this._password) {
       console.log(`用户: ${this._username}, 密码: ${this._password}`);
 
-
-      const SecretPs = "Secret Passphrase"
+      const SecretPs = 'Secret Passphrase';
       const usernameEnCoded = CryptoJS.AES.encrypt(this._username, SecretPs);
 
-
-      const usernameDecrypted = CryptoJS.AES.decrypt(usernameEnCoded, SecretPs).toString();
-
+      const usernameDecrypted = CryptoJS.AES.decrypt(
+        usernameEnCoded,
+        SecretPs
+      ).toString();
 
       const passwordEnCoded = CryptoJS.AES.encrypt(this._username, SecretPs);
 
-      const passwordDecrypted = CryptoJS.AES.decrypt(passwordEnCoded, SecretPs).toString();
-
-
+      const passwordDecrypted = CryptoJS.AES.decrypt(
+        passwordEnCoded,
+        SecretPs
+      ).toString();
 
       console.log(`用户: ${usernameEnCoded}, 密码: ${passwordEnCoded}`);
       console.log(`用户: ${usernameDecrypted}, 密码: ${passwordDecrypted}`);
@@ -129,7 +132,6 @@ export class LoginView extends LitElement {
     }
   }
 }
-
 
 // function encryptToHex(text: string): string {
 //   // An example 128-bit key
