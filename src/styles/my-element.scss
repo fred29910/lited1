@@ -1,0 +1,24 @@
+// 定义一些颜色变量和 mixins
+$primary-color: #646cff;
+$primary-hover-color: #535bf2;
+$card-background: #1a1a1a;
+$light-card-background: #f9f9f9;
+$text-color: #888;
+
+@mixin hover-shadow($color) {
+  filter: drop-shadow(0 0 2em $color);
+}
+
+@mixin button-base($bg) {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: $bg;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+// 这些变量和 mixins 会被编译到最终的 CSS 中
