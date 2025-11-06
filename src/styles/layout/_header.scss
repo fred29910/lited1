@@ -1,0 +1,67 @@
+// layout/_header.scss
+// 页头布局样式
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mixins;
+
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #e9ecef;
+  padding: vars.$spacing-medium 0;
+  position: sticky;
+  top: 0;
+  z-index: vars.$z-index-sticky;
+  
+  &__container {
+    @extend %container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  &__brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: vars.$primary-color;
+    text-decoration: none;
+    
+    &:hover {
+      color: vars.$primary-hover-color;
+    }
+  }
+  
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-large;
+  }
+  
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-medium;
+    
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+  
+  &__menu-item {
+    a {
+      color: vars.$text-color;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.25s ease;
+      
+      &:hover {
+        color: vars.$primary-color;
+      }
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-small;
+  }
+}

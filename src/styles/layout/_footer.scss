@@ -1,0 +1,38 @@
+// layout/_footer.scss
+// 页脚布局样式
+
+@use '../abstracts/variables' as vars;
+
+.footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  padding: vars.$spacing-large 0;
+  margin-top: auto;
+  
+  &__container {
+    @extend %container;
+    text-align: center;
+  }
+  
+  &__text {
+    color: vars.$text-color-secondary;
+    font-size: 0.875rem;
+    margin-bottom: vars.$spacing-small;
+  }
+  
+  &__links {
+    display: flex;
+    justify-content: center;
+    gap: vars.$spacing-medium;
+    
+    a {
+      color: vars.$text-color-secondary;
+      text-decoration: none;
+      font-size: 0.875rem;
+      
+      &:hover {
+        color: vars.$primary-color;
+      }
+    }
+  }
+}

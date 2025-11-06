@@ -1,0 +1,117 @@
+// base/_base.scss
+// 全局基础样式
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mixins;
+
+// Body element
+body {
+  margin: 0;
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  line-height: vars.$line-height-base;
+  color: vars.$text-color;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Main app container
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// App wrapper for layout purposes
+.app-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+// Content area
+.content {
+  flex: 1;
+  padding: vars.$spacing-large vars.$spacing-medium;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  
+  @include mixins.on-breakpoint(tablet) {
+    padding: vars.$spacing-xlarge vars.$spacing-large;
+  }
+}
+
+// Container utility
+.container {
+  @extend %container;
+}
+
+// Container fluid
+.container-fluid {
+  width: 100%;
+  padding-right: vars.$spacing-medium;
+  padding-left: vars.$spacing-medium;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// Grid system
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--spacing-medium) / -2);
+  margin-left: calc(var(--spacing-medium) / -2);
+}
+
+.col {
+  flex: 1;
+  padding-right: calc(var(--spacing-medium) / 2);
+  padding-left: calc(var(--spacing-medium) / 2);
+}
+
+// Utilities for text alignment
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+// Utilities for spacing
+.m-0 { margin: 0; }
+.m-1 { margin: vars.$spacing-small; }
+.m-2 { margin: vars.$spacing-medium; }
+.m-3 { margin: vars.$spacing-large; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: vars.$spacing-small; }
+.p-2 { padding: vars.$spacing-medium; }
+.p-3 { padding: vars.$spacing-large; }
+
+// Utilities for display
+.d-none { display: none; }
+.d-block { display: block; }
+.d-flex { display: flex; }
+.d-inline-flex { display: inline-flex; }
+
+// Utilities for flexbox
+.justify-content-start { justify-content: flex-start; }
+.justify-content-center { justify-content: center; }
+.justify-content-end { justify-content: flex-end; }
+.align-items-start { align-items: flex-start; }
+.align-items-center { align-items: center; }
+.align-items-end { align-items: flex-end; }
+
+// Utility classes for responsive behavior
+@media (max-width: 767px) {
+  .d-md-none { display: none; }
+  .d-md-block { display: block; }
+  .text-md-left { text-align: left; }
+  .text-md-center { text-align: center; }
+  .text-md-right { text-align: right; }
+}
+
+@media (min-width: 768px) {
+  .d-md-flex { display: flex; }
+  .d-lg-none { display: none; }
+  .d-lg-block { display: block; }
+}

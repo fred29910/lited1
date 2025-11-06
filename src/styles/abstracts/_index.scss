@@ -1,0 +1,7 @@
+// abstracts/_index.scss
+// abstracts 目录的入口文件，用于转发所有 abstract 模块
+
+@forward 'variables';
+@forward 'functions';
+@forward 'mixins';
+@forward 'placeholders';

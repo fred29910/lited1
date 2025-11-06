@@ -1,0 +1,35 @@
+// abstracts/_variables.scss
+// 存放项目中所有可复用的变量
+
+// Colors
+$primary-color: #646cff;
+$primary-hover-color: #535bf2;
+$card-background: #1a1a1a;
+$light-card-background: #f9f9f9;
+$text-color: #888;
+$text-color-dark: rgba(255, 255, 255, 0.87);
+
+// Typography
+$font-family-base: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+// Borders
+$border-radius: 8px;
+$border-color: #ddd;
+
+// Spacing
+$spacing-unit: 1rem;
+$spacing-small: 0.5rem;
+$spacing-medium: 1rem;
+$spacing-large: 2rem;
+$spacing-xlarge: 4rem;
+
+// Z-index scale
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;

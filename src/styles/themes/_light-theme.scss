@@ -1,0 +1,50 @@
+// themes/_light-theme.scss
+// 亮色主题样式
+
+@use '../abstracts/variables' as vars;
+
+:root {
+  // Colors
+  --primary-color: #{vars.$primary-color};
+  --primary-hover-color: #{vars.$primary-hover-color};
+  --text-color: #{vars.$text-color};
+  --text-color-secondary: #{vars.$text-color-secondary};
+  --background-color: #ffffff;
+  --card-background: #{vars.$light-card-background};
+  
+  // Spacing
+  --spacing-unit: #{vars.$spacing-unit};
+  --spacing-small: #{vars.$spacing-small};
+  --spacing-medium: #{vars.$spacing-medium};
+  --spacing-large: #{vars.$spacing-large};
+  --spacing-xlarge: #{vars.$spacing-xlarge};
+  
+  // Border radius
+  --border-radius: #{vars.$border-radius};
+  
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+// Theme-specific overrides
+body[data-theme="light"] {
+  color: vars.$text-color;
+  background-color: #ffffff;
+  
+  .card {
+    background-color: vars.$light-card-background;
+    color: inherit;
+  }
+  
+  .header {
+    background-color: #ffffff;
+    border-bottom-color: #e9ecef;
+  }
+  
+  .footer {
+    background-color: #f8f9fa;
+    border-top-color: #e9ecef;
+  }
+}

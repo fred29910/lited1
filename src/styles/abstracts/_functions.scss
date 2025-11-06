@@ -1,0 +1,48 @@
+// abstracts/_functions.scss
+// 存放自定义的 Sass 函数
+
+// Convert pixels to rem
+@function px-to-rem($px, $base-font-size: 16px) {
+  @return ($px / $base-font-size) * 1rem;
+}
+
+// Convert pixels to em
+@function px-to-em($px, $context: 16px) {
+  @return ($px / $context) * 1em;
+}
+
+// Get color from color map
+@function color($key, $map: $colors) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+  @warn "Unknown `#{$key}` in $map.";
+  @return null;
+}
+
+// Calculate luminance for a color
+@function luminance($color) {
+  $r: red($color) / 255;
+  $g: green($color) / 255;
+  $b: blue($color) / 255;
+
+  @if $r <= 0.03928 {
+    $r: $r / 12.92;
+  } @else {
+    $r: (($r + 0.055) / 1.055) * 2.4;
+  }
+
+  @if $g <= 0.03928 {
+    $g: $g / 12.92;
+  } @else {
+    $g: (($g + 0.055) / 1.055) * 2.4;
+  }
+
+  @if $b <= 0.03928 {
+    $b: $b / 12.92;
+  } @else {
+    $b: (($b + 0.055) / 1.055) * 2.4;
+  }
+
+  @return 0.2126 * $r + 0.7152 * $g + 0.0722 * $b;
+}

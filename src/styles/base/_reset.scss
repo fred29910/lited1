@@ -1,0 +1,146 @@
+// base/_reset.scss
+// 现代 CSS Reset 样式，基于最新标准
+
+// Box-sizing reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Margin reset
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// HTML reset
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+// Body reset
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 16px;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Headings reset
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
+// Paragraphs reset
+p {
+  margin: 0;
+}
+
+// Links reset
+a {
+  color: inherit;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Lists reset
+ol, ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Form elements reset
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button::-moz-focus-inner,
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+// Images and media reset
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+svg {
+  fill: currentColor;
+}
+
+// Table reset
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+// Disable default focus styles and define custom ones
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}

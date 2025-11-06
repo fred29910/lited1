@@ -1,0 +1,51 @@
+// abstracts/_placeholders.scss
+// 存放占位符选择器 (%placeholder)
+
+// %visually-hidden
+// 隐藏元素但保持其对屏幕阅读器可见
+%visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// %container
+// 响应式容器基类
+%container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: vars.$spacing-medium;
+  padding-left: vars.$spacing-medium;
+  
+  @include on-breakpoint(tablet) {
+    max-width: 720px;
+  }
+  
+  @include on-breakpoint(desktop) {
+    max-width: 1140px;
+  }
+}
+
+// %flex-center
+// Flexbox 居中容器
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// %card-base
+// 卡片基础样式
+%card-base {
+  background-color: vars.$card-background;
+  border-radius: vars.$border-radius;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: vars.$spacing-large;
+}

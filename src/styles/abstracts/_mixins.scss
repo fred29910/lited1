@@ -1,0 +1,59 @@
+// abstracts/_mixins.scss
+// 存放全局的 Mixins 和通用工具
+
+@use 'variables' as vars;
+
+// Button Base Mixin
+@mixin button-base($bg-color: vars.$primary-color, $text-color: #fff) {
+  display: inline-block;
+  border-radius: vars.$border-radius;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: vars.$font-size-base;
+  font-weight: 500;
+  font-family: vars.$font-family-base;
+  background-color: $bg-color;
+  color: $text-color;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+
+  &:hover {
+    border-color: vars.$primary-hover-color;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+}
+
+// Hover Shadow Effect Mixin
+@mixin hover-shadow($color) {
+  filter: drop-shadow(0 0 2em $color);
+}
+
+// Media Query Breakpoints
+@mixin on-breakpoint($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $breakpoint == desktop {
+    @media (min-width: 1024px) { @content; }
+  }
+}
+
+// Truncate Text Mixin
+@mixin truncate-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Clearfix Mixin
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

@@ -1,0 +1,183 @@
+// components/_card.scss
+// 卡片组件样式
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mixins;
+
+// Base card class
+.card {
+  @extend %card-base;
+  background-color: vars.$card-background;
+  color: inherit;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  // Card header
+  &__header {
+    padding: vars.$spacing-large;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 0;
+    }
+  }
+  
+  // Card body
+  &__body {
+    padding: vars.$spacing-large;
+  }
+  
+  // Card footer
+  &__footer {
+    padding: vars.$spacing-large;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  
+  // Card title
+  &__title {
+    margin-bottom: vars.$spacing-small;
+    color: inherit;
+    font-weight: 600;
+  }
+  
+  // Card subtitle
+  &__subtitle {
+    margin-bottom: vars.$spacing-medium;
+    color: vars.$text-color-secondary;
+    font-size: 0.875rem;
+  }
+  
+  // Card text
+  &__text {
+    color: inherit;
+    line-height: vars.$line-height-base;
+    
+    &:not(:last-child) {
+      margin-bottom: vars.$spacing-medium;
+    }
+  }
+  
+  // Card image
+  &__image {
+    width: 100%;
+    height: auto;
+    border-radius: calc(vars.$border-radius - 1px) calc(vars.$border-radius - 1px) 0 0;
+  }
+  
+  // Card media
+  &__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(vars.$border-radius - 1px) calc(vars.$border-radius - 1px) 0 0;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+  
+  // Card actions
+  &__actions {
+    display: flex;
+    gap: vars.$spacing-small;
+    padding: vars.$spacing-large;
+    padding-top: 0;
+    
+    .btn {
+      flex: 1;
+    }
+    
+    &--start {
+      justify-content: flex-start;
+    }
+    
+    &--center {
+      justify-content: center;
+    }
+    
+    &--end {
+      justify-content: flex-end;
+    }
+  }
+  
+  // Card variants
+  &--elevated {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    border: none;
+  }
+  
+  &--outlined {
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    
+    &:hover {
+      box-shadow: none;
+      transform: none;
+    }
+  }
+  
+  &--flat {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    
+    &:hover {
+      box-shadow: none;
+      transform: none;
+    }
+  }
+  
+  // Card sizes
+  &--small {
+    .card__body,
+    .card__header,
+    .card__footer {
+      padding: vars.$spacing-medium;
+    }
+  }
+  
+  &--large {
+    .card__body,
+    .card__header,
+    .card__footer {
+      padding: calc(vars.$spacing-large * 1.5);
+    }
+  }
+}
+
+// Card group for responsive cards
+.card-group {
+  display: grid;
+  gap: vars.$spacing-large;
+  
+  @include mixins.on-breakpoint(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include mixins.on-breakpoint(desktop) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Card deck for equal height cards
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$spacing-large;
+  
+  .card {
+    flex: 1 1 300px;
+  }
+}
