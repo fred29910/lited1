@@ -1,0 +1,63 @@
+// components/_my-element.scss
+// my-element 组件的专用样式
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mixins;
+
+:host {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+
+    &:hover {
+      filter: drop-shadow(0 0 2em #646cffaa);
+    }
+
+    &.lit:hover {
+      filter: drop-shadow(0 0 2em #325cffaa);
+    }
+  }
+
+  .card {
+    padding: 2em;
+  }
+
+  .read-the-docs {
+    color: vars.$text-color;
+  }
+
+  ::slotted(h1) {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+
+  a {
+    font-weight: 500;
+    color: vars.$primary-color;
+    text-decoration: inherit;
+
+    &:hover {
+      color: vars.$primary-hover-color;
+    }
+  }
+
+  button {
+    @include mixins.button-base(vars.$card-background);
+  }
+
+  @media (prefers-color-scheme: light) {
+    a:hover {
+      color: #747bff;
+    }
+    button {
+      background-color: vars.$light-card-background;
+    }
+  }
+}

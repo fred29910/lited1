@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import litLogo from './assets/lit.svg';
 import viteLogo from '/vite.svg';
-import styles from './styles/my-element-styles.scss';
+import styles from './styles/main.scss';
 
 /**
  * An example element.
